@@ -18,7 +18,7 @@ const TicketForm = () => {
   
         // Making the POST request to the API
         const response = await axios.post(
-          `${import.meta.env.VITE_API_URL}/api/ticketHub`, 
+          `https://api.allorigins.win/get?url=${import.meta.env.VITE_API_URL}/api/ticketHub`, 
           formattedData, 
           {
             headers: {
