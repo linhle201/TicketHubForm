@@ -5,27 +5,38 @@ import { toast } from 'react-toastify';
 import  './App.css';
 
 const TicketForm = () => {
-  const { register, handleSubmit, formState: { errors }, reset } = useForm();
-
-  const onSubmit = async (data) => {
-    try {
-      const response = await axios.post(
-        `https://api.allorigins.win/get?url=${import.meta.env.VITE_API_URL}/api/ticketHub`,
-        data,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+  
+    const onSubmit = async (data) => {
+      try {
+        // Making the POST request to the API
+        const response = await axios.post(
+          `${import.meta.env.VITE_API_URL}/api/ticketHub`, 
+          data, // Send form data as JSON
+          {
+            headers: {
+              'Content-Type': 'application/json', 
+            },
+          }
+        );
+  
+        if (response.status === 200) {
+          console.log("API Response:", response.data); 
+  
+          // Display success message
+          toast.success('Purchase successful!');
+  
+          // Reset the form after successful submission
+          reset();
+        } else {
+          // If API status is not 200, handle error accordingly
+          toast.error('Failed to process the purchase. Please try again.');
         }
-      );
-      // Display success message
-      toast.success('Purchase successful!');
-      reset(); // Reset the form after successful submission
-    } catch (error) {
-      // Display error message
-      toast.error('There was an error submitting the form.');
-    }
-  };
+      } catch (error) {
+        console.error("Error occurred during API call:", error);
+        toast.error('There was an error submitting the form.');
+      }
+    };
 
   return (
     <div className="container-fluid h-100">
