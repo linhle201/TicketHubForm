@@ -10,7 +10,7 @@ const TicketForm = () => {
   const onSubmit = async (data) => {
     try {
       const response = await axios.post(
-        `https://cors-anywhere.herokuapp.com/${import.meta.env.VITE_API_URL}/api/ticketHub`,
+        `https://api.allorigins.win/get?url=${import.meta.env.VITE_API_URL}/api/ticketHub`,
         data,
         {
           headers: {
