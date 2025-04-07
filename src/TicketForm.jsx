@@ -53,7 +53,7 @@ const TicketForm = () => {
                     <input
                       type="number"
                       name="concertId"
-                      value="669115646"
+                      value={669115646}
                       readOnly
                       {...register('concertId')}
                     />
