@@ -9,10 +9,17 @@ const TicketForm = () => {
   
     const onSubmit = async (data) => {
       try {
+        // Convert concertId and quantity to numbers before sending
+        const formattedData = {
+          ...data,
+          concertId: Number(data.concertId),
+          quantity: Number(data.quantity)
+        };
+  
         // Making the POST request to the API
         const response = await axios.post(
           `${import.meta.env.VITE_API_URL}/api/ticketHub`, 
-          data, // Send form data as JSON
+          formattedData, 
           {
             headers: {
               'Content-Type': 'application/json', 
@@ -25,11 +32,9 @@ const TicketForm = () => {
   
           // Display success message
           toast.success('Purchase successful!');
-  
-          // Reset the form after successful submission
           reset();
+
         } else {
-          // If API status is not 200, handle error accordingly
           toast.error('Failed to process the purchase. Please try again.');
         }
       } catch (error) {
