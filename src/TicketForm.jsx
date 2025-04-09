@@ -47,25 +47,42 @@ const TicketForm = () => {
 
   return (
     <div className="container-fluid h-100">
-      <div className="row h-100">
-        <div className="col-md-5 d-flex align-items-center bg-black justify-content-center text-white p-4">
-          <div className="form-container w-100">
-            <h1 className="display-4 fw-semibold" style={{ color: '#f34a8e' }}>World Tour Ticket Form</h1>
+      <div className="row h-100 bg-black">
+        {/* Left side: Form Section */}
+        <div className="col-md-6 d-flex flex-column" style={{ height: '110vh' }}>
+          <div className="text-center" style={{ width: '100%' }}>
+            <h1 className="display-4 fw-semibold mt-3" style={{ color: '#eeb7d1' }}>
+              World Tour Ticket Form
+            </h1>
+            <img 
+              src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/i/87dfcb88-752d-4f09-98b4-e1b21a0bc61c/dclubsd-f51548d2-a3bc-4fca-b898-bbc197fc8ddf.png"
+              alt="World Tour Concert"
+              style={{ width: '80%', height: '300px', marginBottom: '2px', display: 'block', marginLeft: 'auto', marginRight: 'auto' }}
+            />
+           <p className="text-white">             
+            BLACKPINK takes the stage for their World Tour! BLACKPINK is bringing their high-energy performances and mesmerizing choreography to iconic venues around the globe. 
+            This is an event you won't want to miss. Grab your tickets now! <br></br>
+            <strong>Saturday</strong> March 18, 2023</p>
+          </div>
+          
+          {/* Form Container with Flexbox */}
+          <div className="form-container p-4" style={{ flex: 1, overflowY: 'auto' }}>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="row">
-                {/* First Row: Form */}
-                <div className="col-md-6">
+                <div className="col-12 col-md-4">
+                  {/* Concert ID */}
                   <div>
                     <label htmlFor="concertId">Concert ID</label>
                     <input
                       type="number"
                       name="concertId"
-                      value={669115646}
+                      defaultValue={669115646}
                       readOnly
                       {...register('concertId')}
                     />
                   </div>
 
+                  {/* Email */}
                   <div>
                     <label htmlFor="email">Email</label>
                     <input
@@ -74,11 +91,12 @@ const TicketForm = () => {
                       {...register('email', { 
                         required: 'Email is required', 
                         pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: 'Invalid email format' }
-                      })}
+                      })} 
                     />
                     {errors.email && <span>{errors.email.message}</span>}
                   </div>
 
+                  {/* Name */}
                   <div>
                     <label htmlFor="name">Name</label>
                     <input
@@ -89,6 +107,7 @@ const TicketForm = () => {
                     {errors.name && <span>{errors.name.message}</span>}
                   </div>
 
+                  {/* Phone */}
                   <div>
                     <label htmlFor="phone">Phone</label>
                     <input
@@ -97,27 +116,15 @@ const TicketForm = () => {
                       {...register('phone', { 
                         required: 'Phone is required', 
                         pattern: { value: /^\d{10}$/, message: 'Phone number must be 10 digits' }
-                      })}
+                      })} 
                     />
                     {errors.phone && <span>{errors.phone.message}</span>}
                   </div>
                 </div>
 
-                {/* Second Row: Payment and Address Information */}
-                <div className="col-md-6">
-                  <div>
-                    <label htmlFor="quantity">Quantity</label>
-                    <input
-                      type="number"
-                      name="quantity"
-                      {...register('quantity', { 
-                        required: 'Quantity is required', 
-                        min: { value: 1, message: 'Quantity must be at least 1' }
-                      })}
-                    />
-                    {errors.quantity && <span>{errors.quantity.message}</span>}
-                  </div>
-
+                <div className="col-12 col-md-4">
+                  
+                  {/* Credit Card */}
                   <div>
                     <label htmlFor="creditCard">Credit Card</label>
                     <input
@@ -126,11 +133,12 @@ const TicketForm = () => {
                       {...register('creditCard', { 
                         required: 'Credit card number is required', 
                         pattern: { value: /^\d{16}$/, message: 'Credit card number must be 16 digits' }
-                      })}
+                      })} 
                     />
                     {errors.creditCard && <span>{errors.creditCard.message}</span>}
                   </div>
 
+                  {/* Expiration */}
                   <div>
                     <label htmlFor="expiration">Expiration (MM/YY)</label>
                     <input
@@ -139,11 +147,26 @@ const TicketForm = () => {
                       {...register('expiration', { 
                         required: 'Expiration date is required', 
                         pattern: { value: /^(0[1-9]|1[0-2])\/\d{2}$/, message: 'Invalid expiration date format. Use MM/YY' }
-                      })}
+                      })} 
                     />
                     {errors.expiration && <span>{errors.expiration.message}</span>}
                   </div>
 
+                  {/* Quantity */}
+                  <div>
+                    <label htmlFor="quantity">Quantity</label>
+                    <input
+                      type="number"
+                      name="quantity"
+                      {...register('quantity', { 
+                        required: 'Quantity is required', 
+                        min: { value: 1, message: 'Quantity must be at least 1' }
+                      })} 
+                    />
+                    {errors.quantity && <span>{errors.quantity.message}</span>}
+                  </div>
+
+                  {/* Security Code (CVV) */}
                   <div>
                     <label htmlFor="securityCode">Security Code (CVV)</label>
                     <input
@@ -152,11 +175,14 @@ const TicketForm = () => {
                       {...register('securityCode', { 
                         required: 'Security code is required', 
                         pattern: { value: /^\d{3}$/, message: 'Security code must be 3 digits' }
-                      })}
+                      })} 
                     />
                     {errors.securityCode && <span>{errors.securityCode.message}</span>}
                   </div>
+                </div>
+                <div className="col-12 col-md-4">
 
+                  {/* Address */}
                   <div>
                     <label htmlFor="address">Address</label>
                     <input
@@ -167,6 +193,7 @@ const TicketForm = () => {
                     {errors.address && <span>{errors.address.message}</span>}
                   </div>
 
+                  {/* City */}
                   <div>
                     <label htmlFor="city">City</label>
                     <input
@@ -177,6 +204,7 @@ const TicketForm = () => {
                     {errors.city && <span>{errors.city.message}</span>}
                   </div>
 
+                  {/* Province */}
                   <div>
                     <label htmlFor="province">Province</label>
                     <input
@@ -187,6 +215,7 @@ const TicketForm = () => {
                     {errors.province && <span>{errors.province.message}</span>}
                   </div>
 
+                  {/* Postal Code */}
                   <div>
                     <label htmlFor="postalCode">Postal Code</label>
                     <input
@@ -195,11 +224,12 @@ const TicketForm = () => {
                       {...register('postalCode', { 
                         required: 'Postal code is required', 
                         pattern: { value: /(^\d{5}(-\d{4})?$)|(^[A-Za-z]\d[A-Za-z] \d[A-Za-z]\d$)/, message: 'Invalid postal code format' }
-                      })}
+                      })} 
                     />
                     {errors.postalCode && <span>{errors.postalCode.message}</span>}
                   </div>
 
+                  {/* Country */}
                   <div>
                     <label htmlFor="country">Country</label>
                     <input
@@ -212,13 +242,14 @@ const TicketForm = () => {
                 </div>
               </div>
 
+              {/* Submit Button */}
               <button type="submit">Submit</button>
             </form>
           </div>
         </div>
 
-        {/* Right Column: Image */}
-        <div className="col-md-7 bg-cover d-none d-md-block" style={{ backgroundImage: "url('https://res.klook.com/image/upload/v1673236312/v2rfb2znqw8ktmprsczd.jpg')" }}></div>
+        {/* Right Side: Concert Image */}
+        <div className="col-md-6 bg-cover d-none d-md-block" style={{ backgroundImage: "url('https://res.klook.com/image/upload/v1673236312/v2rfb2znqw8ktmprsczd.jpg')" }}></div>
       </div>
     </div>
   );
